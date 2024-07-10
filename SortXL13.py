@@ -379,8 +379,8 @@ def main():
         # Convert 'Sensor Procurement' assuming they are Excel serial dates
         df['Sensor Procurement'] = pd.to_datetime(df['Sensor Procurement'], origin='1899-12-30', unit='D', errors='coerce')
 
-        # Convert 'Sensor Replacement Date' assuming they are Excel serial dates
-        df['Sensor Replacement Date'] = pd.to_datetime(df['Sensor Replacement Date'], origin='1899-12-30', unit='D', errors='coerce')
+        # Convert 'Sensor Replacement Date' directly to datetime
+        df['Sensor Replacement Date'] = pd.to_datetime(df['Sensor Replacement Date'], errors='coerce')
 
         st.write("## Uploaded Data Preview:")
         st.dataframe(df,height=250, width=1200)

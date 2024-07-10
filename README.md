@@ -24,11 +24,11 @@ streamlit run SortXL13.py
 
 ## Usage
 
-**1.** Navigate to the login page and enter your credentials.
-**2.** Select an option (sensor procurement or replacement) and proceed.
-**3.** Upload an Excel file containing sensor data.
-**4.** Use filters to refine data and view results.
-**5.** Download filtered data or reports as needed.
+1. Navigate to the login page and enter your credentials.
+2. Select an option (sensor procurement or replacement) and proceed.
+3. Upload an Excel file containing sensor data.
+4. Use filters to refine data and view results.
+5. Download filtered data or reports as needed.
 
 ## Technologies Used
 

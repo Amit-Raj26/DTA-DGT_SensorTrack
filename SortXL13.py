@@ -309,7 +309,7 @@ def main():
 
     html_string = '<h1>DTA_DGT-SensorTrack</h1>'
     st.markdown(html_string, unsafe_allow_html=True)
-    subheader_text = "Procurement" if st.session_state.track_option == 'sensor_procurement' else "Replacement"
+    subheader_text = "Procurements" if st.session_state.track_option == 'sensor_procurement' else "Replacements"
     html_string = f'<h2 class="subheader"><em>Precision Tracking for Seamless Sensor Procurement and Replacement</em></h2>'
     st.markdown(html_string, unsafe_allow_html=True)
 
@@ -386,7 +386,7 @@ def main():
         st.write("## Uploaded Data Preview:")
         st.dataframe(df, height=250, width=1200)
 
-        st.sidebar.header("Filtering Preferences")
+        st.sidebar.header("{subheader_text} Filtering Preferences")
         plant = st.sidebar.selectbox("Select Plant", ['All'] + df['PLANT'].unique().tolist())
         make = st.sidebar.selectbox("Select Make", ['All'] + df['MAKE'].unique().tolist())
         model = st.sidebar.selectbox("Select Model", ['All'] + df['MODEL'].unique().tolist())

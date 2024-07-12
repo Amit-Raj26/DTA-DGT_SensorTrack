@@ -639,8 +639,8 @@ def main():
                 ]
             )
         elif st.session_state.track_option == 'sensor_replacement':
-            options = "Filtered Data"
-            )
+            data_option = "Filtered Data"
+            
         # Dropdown for selecting file format
         format_option = st.sidebar.selectbox(
             "Select File Format",

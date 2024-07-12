@@ -430,7 +430,7 @@ def main():
                 if len(date_range) == 2:
                     st.sidebar.write(f"### {output_text}: {filtered_df.shape[0]}")
         else:
-            st.sidebar.write(f"### Filtered Procurement Count: {filtered_df.shape[0]}")
+            st.sidebar.write(f"### Total Procurements Count: {filtered_df.shape[0]}")
 
         # Making copy of filtered data to avoid errors
         trimmed_filtered_df = filtered_df
@@ -634,7 +634,7 @@ def main():
             data_option = st.sidebar.selectbox(
                 "Select Data to Download",
                 options=[
-                    "Filtered Data",
+                    "Total Procurements",
                     "Procurements Completed",
                     "Procurements Pending"
                 ]

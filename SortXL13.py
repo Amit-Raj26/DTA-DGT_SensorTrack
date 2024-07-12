@@ -634,18 +634,12 @@ def main():
                 "Select Data to Download",
                 options=[
                     "Filtered Data",
-                    "Procurements Done",
-                    "Procurements Left"
+                    "Procurements Completed",
+                    "Procurements Pending"
                 ]
             )
         elif st.session_state.track_option == 'sensor_replacement':
-            data_option = st.sidebar.selectbox(
-                "Select Data to Download",
-                options=[
-                    "Filtered Data",
-                    "Replacements Done",
-                    "Replacements Left"
-                ]
+            options = "Filtered Data"
             )
         # Dropdown for selecting file format
         format_option = st.sidebar.selectbox(

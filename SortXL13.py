@@ -17,7 +17,7 @@ st.set_page_config(page_title="DTA-DGT_SensorTrack", layout="wide")
 otp_placeholder = st.empty()
 
 # Initial username and password
-initial_username = 'Bhavik.Vaghamshi'
+initial_username = 'RILDTA'
 initial_password = 'Rilfng@1234'
 
 # Session state initialization

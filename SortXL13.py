@@ -435,15 +435,34 @@ def main():
         trimmed_filtered_df = filtered_df
 
         if st.checkbox("Show Filtered Data"):
-
-            # Multiselect dropdown for selecting columns to remove
-            columns_to_remove = st.multiselect(
-                "Select columns to remove:",
-                options=trimmed_filtered_df.columns.tolist()
+            # Multiselect dropdown for selecting columns to display or remove
+            display_or_exclude = st.radio(
+                "Choose whether to display or exclude columns:",
+                options=["Display columns", "Exclude columns"],
+                key="display_exclude_option"
             )
+            if display_or_exclude == "Display columns":
+                # Multiselect dropdown for selecting columns to display
+                columns_to_display = st.multiselect(
+                    "Select columns to display:",
+                    options=trimmed_filtered_df.columns.tolist(),
+                    key="Filtered_DF"
+                )
 
-            # Remove selected columns
-            trimmed_filtered_df = trimmed_filtered_df.drop(columns=columns_to_remove)
+                if columns_to_display:
+                    # Filter the DataFrame to include only the selected columns
+                    trimmed_filtered_df = trimmed_filtered_df[columns_to_display]
+
+
+            else:
+                # Multiselect dropdown for selecting columns to remove
+                columns_to_remove = st.multiselect(
+                    "Select columns to remove:",
+                    options=trimmed_filtered_df.columns.tolist()
+                )
+
+                # Remove selected columns
+                trimmed_filtered_df = trimmed_filtered_df.drop(columns=columns_to_remove)
 
             # Display the DataFrame
             st.dataframe(trimmed_filtered_df, height=250, width=1200)
@@ -466,30 +485,70 @@ def main():
 
             if st.checkbox("Show completed procurements"):
 
-                # Multiselect dropdown for selecting columns to remove
-                columns_to_remove1 = st.multiselect(
-                    "Select columns to remove:",
-                    options=trimmed_procurement_done.columns.tolist(),
-                    key="procurements_done"
+                # Multiselect dropdown for selecting columns to display or remove
+                display_or_exclude1 = st.radio(
+                    "Choose whether to display or exclude columns:",
+                    options=["Display columns", "Exclude columns"],
+                    key="display_exclude_option1"
                 )
+                if display_or_exclude1 == "Display columns":
+                    # Multiselect dropdown for selecting columns to display
+                    columns_to_display1 = st.multiselect(
+                        "Select columns to display:",
+                        options=trimmed_procurement_done.columns.tolist(),
+                        key="procurements_done1"
+                    )
 
-                # Remove selected columns
-                trimmed_procurement_done = trimmed_procurement_done.drop(columns=columns_to_remove1)
+                    if columns_to_display1:
+                        # Filter the DataFrame to include only the selected columns
+                        trimmed_procurement_done = trimmed_procurement_done[columns_to_display]
+
+
+
+                else:
+                    # Multiselect dropdown for selecting columns to remove
+                    columns_to_remove1 = st.multiselect(
+                        "Select columns to remove:",
+                        options=trimmed_procurement_done.columns.tolist(),
+                        key="procurements_done"
+                    )
+
+                    # Remove selected columns
+                    trimmed_procurement_done = trimmed_procurement_done.drop(columns=columns_to_remove1)
 
                 # Display the DataFrame
                 st.dataframe(trimmed_procurement_done, height=250, width=1200)
 
             if st.checkbox("Show remaining procurements"):
 
-                # Multiselect dropdown for selecting columns to remove
-                columns_to_remove2 = st.multiselect(
-                    "Select columns to remove:",
-                    options=trimmed_procurement_left.columns.tolist(),
-                    key="procurements_left"
+                # Multiselect dropdown for selecting columns to display or remove
+                display_or_exclude2 = st.radio(
+                    "Choose whether to display or exclude columns:",
+                    options=["Display columns", "Exclude columns"],
+                    key="display_exclude_option2"
                 )
+                if display_or_exclude2 == "Display columns":
+                    # Multiselect dropdown for selecting columns to display
+                    columns_to_display2 = st.multiselect(
+                        "Select columns to display:",
+                        options=trimmed_procurement_left.columns.tolist(),
+                        key="procurements_left1"
+                    )
 
-                # Remove selected columns
-                trimmed_procurement_left = trimmed_procurement_left.drop(columns=columns_to_remove2)
+                if columns_to_display2:
+                    # Filter the DataFrame to include only the selected columns
+                    trimmed_procurement_done = trimmed_procurement_done[columns_to_display]
+
+                else:
+                    # Multiselect dropdown for selecting columns to remove
+                    columns_to_remove2 = st.multiselect(
+                        "Select columns to remove:",
+                        options=trimmed_procurement_left.columns.tolist(),
+                        key="procurements_left"
+                    )
+
+                    # Remove selected columns
+                    trimmed_procurement_left = trimmed_procurement_left.drop(columns=columns_to_remove2)
 
                 # Display the DataFrame
                 st.dataframe(trimmed_procurement_left, height=250, width=1200)

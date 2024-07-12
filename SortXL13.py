@@ -386,7 +386,9 @@ def main():
         st.write("## Uploaded Data Preview:")
         st.dataframe(df, height=250, width=1200)
 
-        st.sidebar.header("{subheader_text} Filtering Preferences")
+        subheader_text = get_subheader_text()  # Replace with your logic to fetch subheader text dynamically
+        st.sidebar.header(f"{subheader_text} Filtering Preferences")
+
         plant = st.sidebar.selectbox("Select Plant", ['All'] + df['PLANT'].unique().tolist())
         make = st.sidebar.selectbox("Select Make", ['All'] + df['MAKE'].unique().tolist())
         model = st.sidebar.selectbox("Select Model", ['All'] + df['MODEL'].unique().tolist())

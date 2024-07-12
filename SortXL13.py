@@ -310,7 +310,7 @@ def main():
     html_string = '<h1>DTA_DGT-SensorTrack</h1>'
     st.markdown(html_string, unsafe_allow_html=True)
     subheader_text = "Procurement" if st.session_state.track_option == 'sensor_procurement' else "Replacement"
-    html_string = f'<h2 class="subheader"><em>Automating Your Sensor {subheader_text} Workflow</em></h2>'
+    html_string = f'<h2 class="subheader"><em>Precision Tracking for Seamless Sensor Procurement and Replacement</em></h2>'
     st.markdown(html_string, unsafe_allow_html=True)
 
     if st.button("Logout"):

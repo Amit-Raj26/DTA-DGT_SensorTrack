@@ -386,7 +386,7 @@ def main():
         st.write("## Uploaded Data Preview:")
         st.dataframe(df, height=250, width=1200)
 
-        st.sidebar.header("Filter Options")
+        st.sidebar.header("Filtering Preferences")
         plant = st.sidebar.selectbox("Select Plant", ['All'] + df['PLANT'].unique().tolist())
         make = st.sidebar.selectbox("Select Make", ['All'] + df['MAKE'].unique().tolist())
         model = st.sidebar.selectbox("Select Model", ['All'] + df['MODEL'].unique().tolist())
@@ -429,7 +429,7 @@ def main():
                 if len(date_range) == 2:
                     st.sidebar.write(f"### {output_text}: {filtered_df.shape[0]}")
         else:
-            st.sidebar.write(f"### Total Filtered Procurements: {filtered_df.shape[0]}")
+            st.sidebar.write(f"### Filtered Procurement Count: {filtered_df.shape[0]}")
 
         # Making copy of filtered data to avoid errors
         trimmed_filtered_df = filtered_df
@@ -473,8 +473,8 @@ def main():
             procurement_left_data = filtered_df[filtered_df['procurement done'] == 'N']
             total_procurement_done = procurement_done_data.shape[0]
             total_procurement_left = procurement_left_data.shape[0]
-            st.sidebar.write(f"### Procurement Done: {total_procurement_done}")
-            st.sidebar.write(f"### Procurement Left: {total_procurement_left}")
+            st.sidebar.write(f"### Procurements Completed: {total_procurement_done}")
+            st.sidebar.write(f"### Procurements Pending: {total_procurement_left}")
 
             # Making copy of Procurement done data to avoid errors
             trimmed_procurement_done = procurement_done_data
@@ -626,7 +626,7 @@ def main():
             return pdf
 
         # Sidebar for download options
-        st.sidebar.header("Download Options")
+        st.sidebar.header("Export Options")
 
         # Dropdown for selecting data type based on track_option
         if st.session_state.track_option == 'sensor_procurement':

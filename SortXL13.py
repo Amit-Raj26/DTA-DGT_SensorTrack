@@ -387,7 +387,8 @@ def main():
         st.dataframe(df, height=250, width=1200)
 
         subheader_text = get_subheader_text()  # Replace with your logic to fetch subheader text dynamically
-        st.sidebar.header(f"{subheader_text} Filtering Preferences")
+        st.sidebar.header("{} Filtering Preferences".format(subheader_text))
+
 
         plant = st.sidebar.selectbox("Select Plant", ['All'] + df['PLANT'].unique().tolist())
         make = st.sidebar.selectbox("Select Make", ['All'] + df['MAKE'].unique().tolist())

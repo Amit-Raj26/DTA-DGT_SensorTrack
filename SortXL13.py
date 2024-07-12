@@ -17,7 +17,7 @@ st.set_page_config(page_title="DTA-DGT_SensorTrack", layout="wide")
 otp_placeholder = st.empty()
 
 # Initial username and password
-initial_username = 'RILDTA'
+initial_username = 'Bhavik.Vaghamshi'
 initial_password = 'Rilfng@1234'
 
 # Session state initialization
@@ -369,7 +369,8 @@ def main():
     uploaded_file = st.file_uploader("Choose an Excel file", type="xlsx")
     if uploaded_file:
         df = pd.read_excel(uploaded_file)
-         # Convert 'Sensor Validity' to datetime
+
+        # Convert 'Sensor Validity' to datetime
         df['Sensor Validity'] = pd.to_datetime(df['Sensor Validity'], format='%Y-%m-%d', errors='coerce')
 
         # Ensure 'Sensor Procurement' and 'Sensor Replacement Date' are numeric
@@ -379,11 +380,11 @@ def main():
         # Convert 'Sensor Procurement' assuming they are Excel serial dates
         df['Sensor Procurement'] = pd.to_datetime(df['Sensor Procurement'], origin='1899-12-30', unit='D', errors='coerce')
 
-        # Convert 'Sensor Replacement Date' directly to datetime
-        df['Sensor Replacement Date'] = pd.to_datetime(df['Sensor Replacement Date'], errors='coerce')
+        # Convert 'Sensor Replacement Date' assuming they are Excel serial dates
+        df['Sensor Replacement Date'] = pd.to_datetime(df['Sensor Replacement Date'], origin='1899-12-30', unit='D', errors='coerce')
 
         st.write("## Uploaded Data Preview:")
-        st.dataframe(df,height=250, width=1200)
+        st.dataframe(df, height=250, width=1200)
 
         st.sidebar.header("Filter Options")
         plant = st.sidebar.selectbox("Select Plant", ['All'] + df['PLANT'].unique().tolist())
@@ -392,8 +393,19 @@ def main():
         gas_type = st.sidebar.selectbox("Select Gas Type", ['All'] + df['GAS TYPE'].unique().tolist())
 
         date_label = "Sensor Procurement" if st.session_state.track_option == 'sensor_procurement' else "Sensor Replacement Date"
-        date_range = st.sidebar.date_input(f"Select {date_label} Range", [])
 
+        if st.session_state.track_option == 'sensor_replacement':
+            replacement_option = st.sidebar.selectbox("Replacement Option", ['See Current Replacements', 'See Future Replacements'])
+
+            if replacement_option == 'See Current Replacements':
+                date_label = "Sensor Replacement"
+                output_text = "Replacements Done"
+            else:
+                date_label = "Sensor Validity"
+                output_text = "Upcoming Replacements"
+
+
+        date_range = st.sidebar.date_input(f"Select {date_label} Range", [])
 
         filtered_df = df.copy()
         if plant != 'All':
@@ -406,11 +418,18 @@ def main():
             filtered_df = filtered_df[filtered_df['GAS TYPE'] == gas_type]
 
         if date_range:
-            start_date, end_date = date_range
             if len(date_range) == 2:
+                start_date, end_date = date_range
                 filtered_df = filtered_df[(filtered_df[date_label] >= pd.Timestamp(start_date)) & (filtered_df[date_label] <= pd.Timestamp(end_date))]
 
-        st.sidebar.write(f"### Filtered Data Count: {filtered_df.shape[0]}")
+        if st.session_state.track_option == 'sensor_replacement':
+            if replacement_option == 'See Current Replacements':
+                st.sidebar.write(f"### {output_text}: {filtered_df.shape[0]}")
+            else:
+                if len(date_range) == 2:
+                    st.sidebar.write(f"### {output_text}: {filtered_df.shape[0]}")
+        else:
+            st.sidebar.write(f"### Total Filtered Procurements: {filtered_df.shape[0]}")
 
         # Making copy of filtered data to avoid errors
         trimmed_filtered_df = filtered_df
@@ -474,48 +493,6 @@ def main():
 
                 # Display the DataFrame
                 st.dataframe(trimmed_procurement_left, height=250, width=1200)
-
-        elif st.session_state.track_option == 'sensor_replacement':
-            replacement_done_data = filtered_df[filtered_df['replacement done'] == 'Y']
-            replacement_left_data = filtered_df[filtered_df['replacement done'] == 'N']
-            total_replacement_done = replacement_done_data.shape[0]
-            total_replacement_left = replacement_left_data.shape[0]
-            st.sidebar.write(f"### Replacement Done: {total_replacement_done}")
-            st.sidebar.write(f"### Replacement Left: {total_replacement_left}")
-
-            # Making copy of replacement done data to avoid errors
-            trimmed_replacement_done = replacement_done_data
-
-            # Making copy of replacement left data to avoid errors
-            trimmed_replacement_left = replacement_left_data
-
-            if st.checkbox("Show completed replacements"):
-                # Multiselect dropdown for selecting columns to remove
-                columns_to_remove = st.multiselect(
-                    "Select columns to remove:",
-                    options=trimmed_replacement_done.columns.tolist(),
-                    key="replacements_done"
-                )
-
-                # Remove selected columns
-                trimmed_replacement_done = trimmed_replacement_done.drop(columns=columns_to_remove)
-
-                # Display the DataFrame
-                st.dataframe(trimmed_replacement_done, height=250, width=1200)
-
-            if st.checkbox("Show remaining replacements"):
-                # Multiselect dropdown for selecting columns to remove
-                columns_to_remove = st.multiselect(
-                    "Select columns to remove:",
-                    options=trimmed_replacement_left.columns.tolist(),
-                    key="replacements_left"
-                )
-
-                # Remove selected columns
-                trimmed_replacement_left = trimmed_replacement_left.drop(columns=columns_to_remove)
-
-                # Display the DataFrame
-                st.dataframe(trimmed_replacement_left, height=250, width=1200)
 
 
 

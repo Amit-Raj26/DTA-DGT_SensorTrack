@@ -88,8 +88,7 @@ def login():
     }
     </style>
     <div class="login-form">
-        <h2>DTA-DGT SensorTrack</h2>
-        <h2>Login</h2>
+        <h2>DTA-DGT SensorTrack Login</h2>
     """, unsafe_allow_html=True)
 
     username = st.text_input("Username", key="login_username")

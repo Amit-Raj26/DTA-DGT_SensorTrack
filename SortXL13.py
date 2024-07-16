@@ -93,7 +93,7 @@ def login():
 
     username = st.text_input("Username", key="login_username")
     password = st.text_input("Password", type="password", key="login_password")
-    if st.button("Login", key="login_button"):
+    if st.button("DTA-DGT_SensorTrack Login", key="login_button"):
         if username == st.session_state.username and password == st.session_state.password:
             st.session_state.logged_in = True
             st.session_state.page = 'selection'

@@ -47,13 +47,13 @@ def login():
         max-width: 400px;
         margin: auto;
         padding: 20px;
-        background-color: #f9f9f9;
+        background-color: #004d99;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .login-form h2 {
         text-align: center;
-        color: #004d99;
+        color: #f9f9f9;
     }
     .login-form input {
         width: 100%;
@@ -88,12 +88,13 @@ def login():
     }
     </style>
     <div class="login-form">
+        <h2>DTA-DGT SensorTrack</h2>
         <h2>Login</h2>
     """, unsafe_allow_html=True)
 
     username = st.text_input("Username", key="login_username")
     password = st.text_input("Password", type="password", key="login_password")
-    if st.button("DTA-DGT_SensorTrack Login", key="login_button"):
+    if st.button("Login", key="login_button"):
         if username == st.session_state.username and password == st.session_state.password:
             st.session_state.logged_in = True
             st.session_state.page = 'selection'

@@ -47,13 +47,13 @@ def login():
         max-width: 400px;
         margin: auto;
         padding: 20px;
-        background-color: #004d99;
+        background-color: #f9f9f9;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .login-form h2 {
         text-align: center;
-        color: #f9f9f9;
+        color: #004d99;
     }
     .login-form input {
         width: 100%;

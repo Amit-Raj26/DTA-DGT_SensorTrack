@@ -399,7 +399,7 @@ def main():
             replacement_option = st.sidebar.selectbox("Replacement Option", ['See Current Replacements', 'See Future Replacements'])
 
             if replacement_option == 'See Current Replacements':
-                date_label = "Sensor Replacement"
+                date_label = "Sensor Replacement Date"
                 output_text = "Replacements Done"
             else:
                 date_label = "Sensor Validity"

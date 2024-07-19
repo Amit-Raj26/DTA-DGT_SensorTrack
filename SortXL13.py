@@ -373,15 +373,12 @@ def main():
         # Convert 'Sensor Validity' to datetime
         df['Sensor Validity'] = pd.to_datetime(df['Sensor Validity'], format='%Y-%m-%d', errors='coerce')
 
-        # Ensure 'Sensor Procurement' and 'Sensor Replacement Date' are numeric
+        # Ensure 'Sensor Procurement' is numeric and then convert to datetime
         df['Sensor Procurement'] = pd.to_numeric(df['Sensor Procurement'], errors='coerce')
-        df['Sensor Replacement Date'] = pd.to_numeric(df['Sensor Replacement Date'], errors='coerce')
-
-        # Convert 'Sensor Procurement' assuming they are Excel serial dates
         df['Sensor Procurement'] = pd.to_datetime(df['Sensor Procurement'], origin='1899-12-30', unit='D', errors='coerce')
 
-        # Convert 'Sensor Replacement Date' assuming they are Excel serial dates
-        df['Sensor Replacement Date'] = pd.to_datetime(df['Sensor Replacement Date'], origin='1899-12-30', unit='D', errors='coerce')
+        # Directly convert 'Sensor Replacement Date' to datetime
+        df['Sensor Replacement Date'] = pd.to_datetime(df['Sensor Replacement Date'], format='%m/%d/%Y', errors='coerce')
 
         st.write("## Uploaded Data Preview:")
         st.dataframe(df, height=250, width=1200)

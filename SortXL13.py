@@ -291,12 +291,12 @@ def selection_page():
     if sensor_procurement:
         st.session_state.track_option = 'sensor_procurement'
         st.session_state.page = 'main'
-        st.experimental_rerun()
+        st.rerun()
 
     if sensor_replacement:
         st.session_state.track_option = 'sensor_replacement'
         st.session_state.page = 'main'
-        st.experimental_rerun()
+        st.rerun()
 
 # Function to render the main page
 def main():
@@ -316,7 +316,7 @@ def main():
     if st.button("Logout"):
         st.session_state.logged_in = False
         st.session_state.page = 'login'
-        st.experimental_rerun()
+        st.rerun()
 
     with st.expander("How to Use This App"):
         st.markdown("""

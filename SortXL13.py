@@ -98,7 +98,7 @@ def login():
             st.session_state.logged_in = True
             st.session_state.page = 'selection'
             st.success("Logged in successfully")
-            st.experimental_rerun()  # Ensure the app reruns to reflect the state change
+            st.rerun()  # Ensure the app reruns to reflect the state change
         else:
             st.error("Invalid username or password")
 

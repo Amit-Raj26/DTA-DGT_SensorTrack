@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Update package lists
+apt-get update
+
 # Install wkhtmltopdf
-sudo apt-get update
-sudo apt-get install -y wkhtmltopdf
+apt-get install -y wkhtmltopdf

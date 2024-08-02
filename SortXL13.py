@@ -617,7 +617,7 @@ def main():
             </body>
             </html>
             """
-            path_to_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+            path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
             config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
 
             pdf = pdfkit.from_string(html, False, configuration=config)

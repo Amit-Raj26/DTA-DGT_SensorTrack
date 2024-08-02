@@ -5,6 +5,7 @@ from io import BytesIO
 import random
 import subprocess
 import os
+import time
 # Ensure wkhtmltopdf is installed
 if not os.path.exists('setup.sh'):
     st.warning("wkhtmltopdf is not installed. Running setup script...")

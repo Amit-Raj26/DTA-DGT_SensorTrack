@@ -579,6 +579,7 @@ def main():
             return processed_data
 
         def convert_df_to_pdf(df):
+            start_time = time.time()
             date_columns = ['Sensor Validity', 'Sensor Procurement']
             for col in date_columns:
                 if col in df.columns:
@@ -620,7 +621,13 @@ def main():
             path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
             config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
 
+             html_ready_time = time.time()
+            print(f"Time to prepare HTML: {html_ready_time - start_time} seconds")
+
             pdf = pdfkit.from_string(html, False, configuration=config)
+
+             pdf_ready_time = time.time()
+             print(f"Time to generate PDF: {pdf_ready_time - html_ready_time} seconds")
             return pdf
 
         # Sidebar for download options
